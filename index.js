@@ -36,22 +36,6 @@ Parsers.prototype.parseFile = function parseFile(filepath, options, next) {
 
 
 /**
- * Read a file at the given `filepath`, passing the resulting
- * string and `options` to the `.parse()` method.
- *
- * @param {String} `filepath`
- * @param {Object} `options` to pass to [gray-matter]
- * @return {Object} Parsed `file` object.
- * @api public
- */
-
-Parsers.prototype.parseFileSync = function parseFileSync(filepath, options) {
-  var str = fs.readFileSync(filepath, 'utf8');
-  return this.parseSync(str, options);
-};
-
-
-/**
  * Synchronously read and parse a glob of files from the given `patterns`
  * and callback `next(err, str)`. Options are passed to [globby] and `.parseSync()`.
  *
@@ -88,23 +72,6 @@ Parsers.prototype.parseFiles = function(patterns, options, next) {
         self.parse({content: str}, stack, cb);
       };
     }), next);
-  });
-};
-
-
-/**
- * Synchronously read and parse a glob of files from the given `patterns`,
- * passing any options to [globby] and `.parseSync()`.
- *
- * @param {String} `filepath`
- * @param {Object} `options` to pass to [gray-matter]
- * @return {Object} Parsed `file` object.
- * @api public
- */
-
-Parsers.prototype.parseFilesSync = function parseFilesSync(patterns, options) {
-  return glob.sync(patterns, options).map(function (filepath) {
-    return this.parseFileSync(filepath, options);
   });
 };
 
