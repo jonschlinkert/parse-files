@@ -8,12 +8,20 @@ var Parsers = require('parser-cache');
 
 
 /**
- * Asynchronously read a file at the given `filepath` and
+ * Asynchronously read and parse a file at the given `filepath` and
  * callback `next(err, str)`.
  *
- * @param {String} `path`
+ * **Example:**
+ *
+ * ```js
+ * parsers.parseFile('docs/abc.md', function (err, file) {
+ *   console.log(file);
+ * });
+ * ```
+ *
+ * @param {String} `filepath` The file to parse.
  * @param {Object|Function} `options` or next function.
- * @param {Function} `next`
+ * @param {Function} `next` Callback function.
  * @api public
  */
 
@@ -26,8 +34,10 @@ Parsers.prototype.parseFile = function parseFile(filepath, options, next) {
   var opts = _.extend({}, options);
 
   try {
+    var stack = this.get(path.extname(filepath));
     var str = fs.readFileSync(filepath, 'utf8');
-    this.parse(str, opts, next);
+
+    this.parse({content: str}, stack, next);
   } catch (err) {
     next(err);
     return;
@@ -37,11 +47,19 @@ Parsers.prototype.parseFile = function parseFile(filepath, options, next) {
 
 /**
  * Synchronously read and parse a glob of files from the given `patterns`
- * and callback `next(err, str)`. Options are passed to [globby] and `.parseSync()`.
+ * and callback `next(err, str)`. Options are passed to [globby] and `.parseFile()`.
  *
- * @param {String} `path`
+ * **Example:**
+ *
+ * ```js
+ * parsers.parseFiles('docs/*.md', function (err, files) {
+ *   console.log(files);
+ * });
+ * ```
+ *
+ * @param {String} `glob` Glob patterns to use for files to parse.
  * @param {Object|Function} `options` or next function.
- * @param {Function} `next`
+ * @param {Function} `next` Callback function.
  * @api public
  */
 
@@ -66,10 +84,8 @@ Parsers.prototype.parseFiles = function(patterns, options, next) {
     }
 
     async.series(files.map(function (fp) {
-      var stack = self.get(path.extname(fp));
-      var str = fs.readFileSync(fp, 'utf8');
       return function (cb) {
-        self.parse({content: str}, stack, cb);
+        self.parseFile(fp, options, cb);
       };
     }), next);
   });

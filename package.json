@@ -1,7 +1,7 @@
 {
   "name": "parse-files",
-  "description": "The most interesting project in the world > Verb",
-  "version": "0.1.0",
+  "description": "Complimentary lib to parser-cache. Extends the `Parsers` prototype with additional methods for reading files from the file system.",
+  "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/parse-files",
   "author": {
     "name": "Jon Schlinkert",
