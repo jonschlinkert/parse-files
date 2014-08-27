@@ -1,0 +1,53 @@
+{
+  "name": "parse-files",
+  "description": "The most interesting project in the world > Verb",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/parse-files",
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonschlinkert/parse-files.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/parse-files/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jonschlinkert/parse-files/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "devDependencies": {
+    "gray-matter": "^0.4.2",
+    "mocha": "*",
+    "parser-utils": "^0.2.0",
+    "should": "^4.0.4",
+    "verb": ">= 0.2.6",
+    "verb-tag-jscomments": ">= 0.2.0"
+  },
+  "keywords": [
+    "docs",
+    "documentation",
+    "generate",
+    "generator",
+    "markdown",
+    "templates",
+    "verb"
+  ],
+  "dependencies": {
+    "async": "^0.9.0",
+    "globby": "^0.1.1",
+    "lodash": "^2.4.1",
+    "parser-cache": "^0.3.0"
+  }
+}
